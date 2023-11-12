@@ -5,7 +5,17 @@
 
 	<!-- add your bean definitions here! -->
 	<beans>
-		<bean id="customerManagementService" class="com.yrgo.services.customers.CustomerManagementMockImpl">
-		</bean>
+		<bean id="customerManagementService" class="com.yrgo.services.customers.CustomerManagementMockImpl" />
+	<!-- 定义CustomerManagementServiceMockImpl bean -->
+
+	<!-- 定义DiaryManagementServiceMockImpl bean -->
+	<bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl" />
+
+	<!-- 定义CallHandlingServiceImpl bean，通过构造函数注入依赖项 -->
+	<bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
+		<constructor-arg ref="customerManagementService" />
+		<constructor-arg ref="diaryManagementService" />
+	</bean>
 	</beans>
+
 
