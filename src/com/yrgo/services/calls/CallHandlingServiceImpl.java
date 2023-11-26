@@ -28,13 +28,5 @@ public class CallHandlingServiceImpl implements CallHandlingService {
             diaryManagementService.recordAction(action);
         }
     }
-    @Override
-    public CustomerManagementService getCustomerManagementService() {
-        return customerManagementService;
-    }
-    @Override
-    public void recordActions(String customerId, Collection<Action> actions) {
-
-    }
 }
 
