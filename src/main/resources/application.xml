@@ -4,18 +4,44 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 	<!-- add your bean definitions here! -->
+
 	<beans>
-		<bean id="customerManagementService" class="com.yrgo.services.customers.CustomerManagementMockImpl" />
-	<!-- 定义CustomerManagementServiceMockImpl bean -->
+
+	<bean id="customerManagementServiceProductionImpl" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
+		<property name="customerDao" ref="customerDaoJdbcTemplateImpl"/>
+	</bean>
 
 	<!-- 定义DiaryManagementServiceMockImpl bean -->
 	<bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl" />
 
 	<!-- 定义CallHandlingServiceImpl bean，通过构造函数注入依赖项 -->
 	<bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
-		<constructor-arg ref="customerManagementService" />
+		<constructor-arg ref="customerManagementServiceProductionImpl" />
 		<constructor-arg ref="diaryManagementService" />
 	</bean>
-	</beans>
+
+	<!-- DataSources -->
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp.BasicDataSource"
+		  destroy-method="close">
+		<property name= "driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name= "url" value
+				="jdbc:hsqldb:file:database.dat;shutdown=true;lock_file=false" />
+		<property name = "username" value="sa"/>
+		<property name="password" value ="" />
+	</bean>
+
+	<!-- Templates -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<!-- Define bean for CustomerDao implementation -->
+	<bean id="customerDaoJdbcTemplateImpl" class="com.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl"
+		  init-method="createTables">
+		<constructor-arg ref="jdbcTemplate"/>
+	</bean>
+
+</beans>
 
 

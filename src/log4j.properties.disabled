@@ -13,3 +13,4 @@ log4j.rootLogger=FATAL, mainlog
 log4j.logger.org.springframework.orm.hibernate3.HibernateTransactionManager=DEBUG
 #log4j.logger.org.springframework.orm.jpa.JpaTransactionManager=DEBUG
 
+

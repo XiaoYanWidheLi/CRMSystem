@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import com.yrgo.services.customers.CustomerManagementServiceProductionImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.yrgo.domain.Action;
@@ -21,8 +22,10 @@ public class SimpleClient {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
 
-        CustomerManagementService customerService = container.getBean(CustomerManagementService.class);
+        CustomerManagementService customerService = container.getBean(CustomerManagementServiceProductionImpl.class);
         DiaryManagementService diaryService = container.getBean(DiaryManagementService.class);
+
+        customerService.newCustomer(new Customer("OB74", "Fargo Ltd", "some notes"));
 
         CallHandlingService callService = container.getBean(CallHandlingService.class);
 
@@ -36,9 +39,10 @@ public class SimpleClient {
         actions.add(action2);
 
         try {
-            callService.recordCall("NV10", newCall, actions);
+            callService.recordCall("OB74", newCall, actions);
         }catch(CustomerNotFoundException e) {
-            System.err.println("This customer does not exist.");
+            //System.err.println(e.getMessage());
+            e.printStackTrace();
         }
 
         System.out.println("Here are the actions:");

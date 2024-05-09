@@ -43,7 +43,6 @@ public class Customer {
 		this.calls.add(callDetails);
 	}
 
-
 	public String toString(){
 		return this.customerId + ": " + this.companyName ;
 	}
@@ -97,5 +96,6 @@ public class Customer {
 	}
 
 	// needed for JPA - ignore until then
-	public Customer() {}
+	public Customer() {
+	}
 }

@@ -28,5 +28,9 @@ public class CallHandlingServiceImpl implements CallHandlingService {
             diaryManagementService.recordAction(action);
         }
     }
+    @Override
+    public void recordCall(String customerId, Call newCall) throws CustomerNotFoundException {
+        customerManagementService.recordCall(customerId, newCall);
+    }
 }
 

@@ -8,24 +8,24 @@ import com.yrgo.domain.Customer;
 
 public interface CustomerManagementService {
 
-	public void newCustomer(Customer newCustomer);
+	void newCustomer(Customer newCustomer);
 
 
-	public void updateCustomer(Customer changedCustomer);
+	void updateCustomer(Customer changedCustomer);
 
 
-	public void deleteCustomer(Customer oldCustomer);
+	void deleteCustomer(Customer oldCustomer);
 
 
-	public Customer findCustomerById(String customerId) throws CustomerNotFoundException;
+	Customer findCustomerById(String customerId) throws CustomerNotFoundException;
 
-	public List<Customer> findCustomersByName (String name);
+	List<Customer> findCustomersByName (String name);
 
-	public List<Customer> getAllCustomers();
+	List<Customer> getAllCustomers();
 
 
-	public Customer getFullCustomerDetail(String customerId) throws CustomerNotFoundException;
+	Customer getFullCustomerDetail(String customerId) throws CustomerNotFoundException;
 
 	
-	public void recordCall(String customerId, Call callDetails) throws CustomerNotFoundException;
+	void recordCall(String customerId, Call callDetails) throws CustomerNotFoundException;
 }

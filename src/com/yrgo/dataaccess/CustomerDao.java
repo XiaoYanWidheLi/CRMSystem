@@ -7,21 +7,21 @@ import com.yrgo.domain.Customer;
 
 public interface CustomerDao {
 
-	public void create(Customer customer);
+	void create(Customer customer);
 
-	public Customer getById(String customerId) throws RecordNotFoundException;
+	Customer getById(String customerId) throws RecordNotFoundException;
 
-	public List<Customer> getByName(String name);
+	List<Customer> getByName(String name);
 
-	public void update(Customer customerToUpdate) throws RecordNotFoundException;
+	void update(Customer customerToUpdate) throws RecordNotFoundException;
 
-	public void delete(Customer oldCustomer) throws RecordNotFoundException;
+	void delete(Customer oldCustomer) throws RecordNotFoundException;
 
-	public List<Customer> getAllCustomers();
-
-
-	public Customer getFullCustomerDetail(String customerId) throws RecordNotFoundException;
+	List<Customer> getAllCustomers();
 
 
-	public void addCall (Call newCall, String customerId) throws RecordNotFoundException;
+	Customer getFullCustomerDetail(String customerId) throws RecordNotFoundException;
+
+
+	void addCall (Call newCall, String customerId) throws RecordNotFoundException;
 }

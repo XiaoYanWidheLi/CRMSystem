@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
 
-public class CustomerManagementMockImpl implements com.yrgo.services.customers.CustomerManagementService {
+public class CustomerManagementMockImpl implements CustomerManagementService {
     private HashMap<String, Customer> customerMap;
 
     public CustomerManagementMockImpl() {

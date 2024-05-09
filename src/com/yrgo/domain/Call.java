@@ -11,11 +11,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TBL_CALL")
 public class Call {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-
 	private Date timeAndDate;
 
 	private String notes;
@@ -26,7 +21,6 @@ public class Call {
 	}
 
 	public Call(String notes, Date timestamp){
-		// this defaults to a timestamp of "now"
 		this.timeAndDate = timestamp;
 		this.notes = notes;
 	}
