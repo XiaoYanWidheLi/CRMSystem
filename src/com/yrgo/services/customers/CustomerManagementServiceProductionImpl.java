@@ -6,12 +6,23 @@ import com.yrgo.domain.Customer;
 
 import java.util.List;
 import com.yrgo.domain.Call;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
+
+@Service
+@Transactional
+@Qualifier("CustomerManagementServiceProductionImpl")
 public class CustomerManagementServiceProductionImpl implements CustomerManagementService {
+
+
 
     private CustomerDao customerDao;
 
     // Setter method for injecting CustomerDao
+
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
     }

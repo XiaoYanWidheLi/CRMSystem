@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
 
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+@Service
+@Qualifier("CustomerManagementMockImpl")
 public class CustomerManagementMockImpl implements CustomerManagementService {
     private HashMap<String, Customer> customerMap;
 

@@ -12,19 +12,10 @@ public class Action {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int actionId;
-
-
 	private String details;
-
-
 	private Calendar requiredBy;
-
-
 	private String owningUser;
-
-
 	private boolean complete;
-
 
 	public Action(String details, Calendar requiredBy, String owningUser){
 		this.details = details;
@@ -32,7 +23,6 @@ public class Action {
 		this.owningUser = owningUser;
 		this.complete = false;
 	}
-
 	public Action(String actionId, String details, Calendar requiredBy, String owningUser, boolean complete){
 		this.details = details;
 		this.requiredBy = requiredBy;
@@ -43,23 +33,18 @@ public class Action {
 		this.actionId = new Integer(actionId);
 	}
 
-
 	public boolean isOverdue()	{
 		Calendar dateNow = new java.util.GregorianCalendar();
 
 		return dateNow.after(this.requiredBy);
 	}
 
-
 	public String toString()	{
 		return "Action for " + this.owningUser + ": " + this.details + ", required by " + this.requiredBy.getTime();
 	}
-
-
 	public void completeAction()	{
 		this.complete = true;
 	}
-
 
 	public boolean isComplete() 	{
 		return this.complete;

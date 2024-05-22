@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CustomerDao {
 
 	void create(Customer customer);

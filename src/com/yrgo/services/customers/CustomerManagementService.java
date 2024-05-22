@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public interface CustomerManagementService {
 
 	void newCustomer(Customer newCustomer);
