@@ -46,14 +46,34 @@
 		<property name="password" value ="" />
 	</bean>
 
+	<!-- Configure EntityManagerFactory -->
+	<bean id="entityManagerFactory"
+		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.yrgo.dataaccess" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<!-- Additional JPA properties can be configured here -->
+	</bean>
+
 
 	<!-- Transaction Manager -->
+	<!--
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+	-->
 
-	<!-- Transaction Configuration -->
+	<bean id="transactionManager"
+		  class="org.springframework.orm.jpa.JpaTransactionManager"
+		  autowire="byType" />
+
+
+    <!-- Transaction Configuration -->
 	<tx:annotation-driven/>
+
+
 
 	</beans>
 
