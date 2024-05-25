@@ -23,7 +23,7 @@ public class SimpleClientProduction {
 
     public static void main(String[] args) throws CustomerNotFoundException {
         //ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application-annotation.xml", "application.xml");
-        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application-annotation2.xml", "application.xml");
+        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application-annotation.xml", "application.xml");
         //ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
 
         //CustomerManagementService customerService = container.getBean(CustomerManagementServiceProductionImpl.class);

@@ -6,8 +6,8 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="DEBUG"/>
-        <Logger name="org.springframework" level="debug"/>
+        <Logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="WARN"/>
+        <Logger name="org.springframework" level="WARN"/>
         <!-- <Logger name="org.springframework.beans.factory" level="debug"/> -->
         <!--Logger name="org.springframework.context" level="debug"/> -->
         <!-- <Logger name="org.springframework.orm.hibernate3.HibernateTransactionManager" level="DEBUG"/>  -->

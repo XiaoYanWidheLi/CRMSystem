@@ -1,10 +1,10 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:context="http://www.springframework.org/schema/context"
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
 
-       xsi:schemaLocation="
+	   xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/tx
@@ -14,32 +14,47 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Transaction Manager -->
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-          autowire="byName"/>
+	<bean id="customerManagementServiceProductionImpl" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
+	</bean>
+	<bean id="customerManagementMockImpl" class="com.yrgo.services.customers.CustomerManagementMockImpl"/>
 
-    <!-- DataSources -->
-    <bean id="dataSource"
-          class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name= "driverClassName" value="org.hsqldb.jdbcDriver" />
-        <property name= "url" value
-                ="jdbc:hsqldb:file:database.dat;shutdown=true;lock_file=false" />
-        <property name = "username" value="sa"/>
-        <property name="password" value ="" />
-    </bean>
+	<!-- 定义DiaryManagementServiceMockImpl bean -->
+	<bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl" />
 
-    <bean id="customerManagementServiceProductionImpl" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
-        <property name="customerDao" ref="customerDaoJdbcTemplateImpl"/>
-    </bean>
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
-          autowire="constructor"/>
+	<!-- 定义CallHandlingServiceImpl bean，通过构造函数注入依赖项 -->
+	<bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
+	</bean>
 
-    <!-- Transaction Configuration -->
-    <tx:annotation-driven/>
+	<!-- Templates -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	</bean>
+
+	<!-- Define bean for CustomerDao implementation -->
+	<bean id="customerDaoJdbcTemplateImpl" class="com.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl">
+	</bean>
+
+	<context:component-scan base-package="com.yrgo" />
+
+	<!-- DataSources -->
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp.BasicDataSource"
+		  destroy-method="close">
+		<property name= "driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name= "url" value
+				="jdbc:hsqldb:file:database.dat;shutdown=true;lock_file=false" />
+		<property name = "username" value="sa"/>
+		<property name="password" value ="" />
+	</bean>
 
 
-    <context:component-scan base-package="com.yrgo"/>
+	<!-- Transaction Manager -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
 
-</beans>
+	<!-- Transaction Configuration -->
+	<tx:annotation-driven/>
+
+	</beans>
+
+
