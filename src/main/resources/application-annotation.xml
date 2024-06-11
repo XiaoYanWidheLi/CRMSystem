@@ -14,24 +14,6 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="customerManagementServiceProductionImpl" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
-	</bean>
-	<bean id="customerManagementMockImpl" class="com.yrgo.services.customers.CustomerManagementMockImpl"/>
-
-	<!-- 定义DiaryManagementServiceMockImpl bean -->
-	<bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl" />
-
-	<!-- 定义CallHandlingServiceImpl bean，通过构造函数注入依赖项 -->
-	<bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
-	</bean>
-
-	<!-- Templates -->
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-	</bean>
-
-	<!-- Define bean for CustomerDao implementation -->
-	<bean id="customerDaoJdbcTemplateImpl" class="com.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl">
-	</bean>
 
 	<context:component-scan base-package="com.yrgo" />
 
