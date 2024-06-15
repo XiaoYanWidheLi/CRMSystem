@@ -40,22 +40,12 @@ public class JpaCustomerDao implements CustomerDao {
 
     @Override
     public void update(Customer customerToUpdate) throws RecordNotFoundException {
-        try {
-            em.createQuery("update Customer as c " +
-                            "SET c.companyName=:companyName, c.email=:email, c.telephone=:telephone, " +
-                            "c.notes=:notes, c.calls=:calls WHERE c.customerId=:customerId")
-                    .setParameter("companyName", customerToUpdate.getCustomerId())
-                    .setParameter("email", customerToUpdate.getEmail())
-                    .setParameter("telephone", customerToUpdate.getTelephone())
-                    .setParameter("notes", customerToUpdate.getNotes())
-                    .setParameter("calls", customerToUpdate.getCalls())
-                    .setParameter("customerId", customerToUpdate.getCustomerId())
-                    .executeUpdate();
+        if (em.find(Customer.class, customerToUpdate.getCustomerId()) == null) {
+            throw new RecordNotFoundException("Customer not found");
         }
-        catch (javax.persistence.EntityNotFoundException e) {
-            throw new RecordNotFoundException(e.getMessage());
+        else {
+            em.merge(customerToUpdate);
         }
-
     }
 
     @Override
@@ -76,11 +66,9 @@ public class JpaCustomerDao implements CustomerDao {
 
     @Override
     public Customer getFullCustomerDetail(String customerId) throws RecordNotFoundException {
-        Customer customer = getById(customerId);
-        List<Call> calls = em.createQuery("select calls from Calls as calls where calls.customerId =:customerId")
+        Customer customer = (Customer) em.createQuery("select customer from Customer as customer left join fetch customer.calls where customer.customerId=:customerId")
                 .setParameter("customerId",customerId)
-                .getResultList();
-        customer.setCalls(calls);
+                .getSingleResult();
         return customer;
     }
 

@@ -49,6 +49,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Transactional
     public void createTables(){
             try {
         // Create CUSTOMER table

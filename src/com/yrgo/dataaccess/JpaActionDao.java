@@ -1,6 +1,7 @@
 package com.yrgo.dataaccess;
 
 import com.yrgo.domain.Action;
+import com.yrgo.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -29,19 +30,11 @@ public class JpaActionDao implements ActionDao {
 
     @Override
     public void update(Action actionToUpdate) throws RecordNotFoundException {
-        try {
-            em.createQuery("update Action as action " +
-                            "SET action.details=:details, action.complete=:complete, " +
-                            "action.owningUser=:owningUser, action.requiredBy=:requiredBy WHERE action.actionId=:actionId")
-                    .setParameter("details", actionToUpdate.getDetails())
-                    .setParameter("complete", actionToUpdate.isComplete())
-                    .setParameter("owningUser", actionToUpdate.getOwningUser())
-                    .setParameter("requiredBy", actionToUpdate.getRequiredBy())
-                    .setParameter("actionId", actionToUpdate.getActionId())
-                    .executeUpdate();
+        if (em.find(Customer.class, actionToUpdate.getActionId()) == null) {
+            throw new RecordNotFoundException("Action not found");
         }
-        catch (javax.persistence.EntityNotFoundException e) {
-            throw new RecordNotFoundException(e.getMessage());
+        else {
+            em.merge(actionToUpdate);
         }
     }
 
