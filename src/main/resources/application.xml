@@ -36,12 +36,6 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 
-	<!-- Define bean for CustomerDao implementation -->
-	<bean id="customerDaoJdbcTemplateImpl" class="com.yrgo.dataaccess.CustomerDaoJdbcTemplateImpl"
-		  init-method="createTables">
-		<constructor-arg ref="jdbcTemplate"/>
-	</bean>
-
 </beans>
 
 

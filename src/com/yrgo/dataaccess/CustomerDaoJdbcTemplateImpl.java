@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.RowMapper;
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 @Transactional
@@ -49,7 +51,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Transactional
+    @PostConstruct
     public void createTables(){
             try {
         // Create CUSTOMER table
